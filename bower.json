@@ -1,0 +1,27 @@
+{
+  "name": "jQuery Plugin Wrapper for Angular",
+  "version": "0.0.0",
+  "authors": [
+    "Brett <Brett@WipDeveloper.com>"
+  ],
+  "description": "jQuery Plugin Wrapper for Angular",
+  "main": "index.html",
+  "keywords": [
+    "jquery",
+    "angular"
+  ],
+  "license": "MIT",
+  "homepage": "www.WIPDeveloper.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.13",
+    "jquery": "~2.1.3"
+  }
+}

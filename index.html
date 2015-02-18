@@ -1,0 +1,42 @@
+<!DOCTYPE html/>
+<html>
+	<head>
+		<script src="js/libs/jquery/dist/jquery.js"></script>
+		<script src="js/libs/maskerade/jquery.maskerade.js"></script>
+		<script src="js/libs/angular/angular.js" ></script>
+		<script src="js/app.js" ></script>
+		<script src="js/mainController.js" ></script>
+		<script src="js/maskeradeDirective.js" ></script>
+	</head>
+	<body>
+		<div ng-app="app" ng-controller="mainController as main">
+			<div>
+				<label for="dateEntered">Selected With jQuery</label>
+				<input type="text" class="jqueryDate" name="dateEntered" ng-model="main.dateEntered" placeholder="Put Date Here"/>
+			</div>
+			<div>
+				<label for="dateEntered">Angular model updated with ngChange</label>
+				<input type="text" class="jqueryDate" name="dateEntered" ng-model="main.dateEntered" placeholder="Put Date Here"/>
+			</div>			
+			<div>
+				<label for="dateEntered">Angular Directive</label>
+				<div maskerade-directive date-value="main.dateEntered" placeholder-text="Put Date Here" >
+				</div>
+			</div>		
+			<div>
+				<label for="dateEntered">Angular Directive Custom Masks</label>
+				<div maskerade-directive date-value="main.dateEntered" placeholder-text="Put Date Here" date-mask="dd/mm/yyyy" date-ng-mask="dd/MM/yyyy" >
+				</div>
+			</div>
+			<div>
+				<label>main.dateEntered value: </label>
+				<span>{{main.dateEntered}}</span>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function (){
+			  $(".jqueryDate").maskerade();
+			});
+		</script>
+	</body>
+</html>
