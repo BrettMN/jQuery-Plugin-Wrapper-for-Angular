@@ -1,0 +1,34 @@
+<!DOCTYPE html/>
+<html>
+	<head>
+		<script src="js/libs/jquery/dist/jquery.js"></script>
+		<script>
+			console.log('plain jquery');		
+			console.log($());		
+		</script>
+		<script src="js/libs/maskerade/jquery.maskerade.js"></script>
+		<script>
+			console.log('jquery with maskerade');		
+			console.log($());		
+		</script>
+		<script src="js/libs/jquery/dist/jquery.js"></script>		
+		<script>	
+			console.log('jquery with maskerade now missing');
+			console.log($());		
+		</script>
+		<script src="js/libs/maskerade/jquery.maskerade.js"></script>
+		<script src="js/libs/angular/angular.js" ></script>
+		<script src="js/libs/jquery/dist/jquery.js"></script>
+		<script>		
+			console.log('jquery with maskerade still missing');
+			console.log($());	
+			console.log('angular.element with maskerade');
+			console.log(angular.element());		
+		</script>
+	
+	</head>
+	<body>
+	<h2>Open your console</h2>
+	
+	</body>
+</html>

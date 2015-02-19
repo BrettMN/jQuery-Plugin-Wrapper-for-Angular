@@ -2,9 +2,9 @@
 	'use strict';	
 
 	angular.module('app')
-	.directive('maskeradeDirective', ['$filter', MaskeradeDirective]);
+	.directive('wipMaskeradeDirective', ['$filter', WipMaskeradeDirective]);
 
-	function MaskeradeDirective ($filter) {
+	function WipMaskeradeDirective ($filter) {
 		return {
 			restrict: 'EA',
 			replace:true,
