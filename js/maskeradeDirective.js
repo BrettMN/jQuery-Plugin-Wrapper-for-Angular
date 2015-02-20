@@ -48,7 +48,6 @@
             });
 
             function onChange(date) {
-            	console.log(date);
             	if(form){
 	                form[$scope.wipName].$setValidity('invalidDate', !isNaN(date.getTime()));
 	            }
