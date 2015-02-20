@@ -39,14 +39,12 @@
 
             var filter = $filter('date');
             $scope.localValue = filter($scope.wipValue, $scope.wipNgMask);
-
-            var element = $element[0];
-console.log(element);
-            angular.element(element).maskerade({
+            
+            angular.element($element[0]).maskerade({
                 mask: $scope.wipMaskeradeMask,
                 change: onChange,
                 correct: onChange,
-				corrected: onChange,
+                corrected: onChange,
             });
 
             function onChange(date) {
