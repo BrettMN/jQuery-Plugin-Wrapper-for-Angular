@@ -2,48 +2,65 @@
 	'use strict';	
 
 	angular.module('app')
-	.directive('wipMaskeradeDirective', ['$filter', WipMaskeradeDirective]);
+	.directive('wipMaskeradeDirective', ['$filter', WipMaskeradeDirective]);	
 
-	function WipMaskeradeDirective ($filter) {
-		return {
-			restrict: 'EA',
-			replace:true,
-			scope:{
-				dateValue: '=',
-				dateMask:'@?',
-				dateNgMask:'@?',
-				placeholderText:'@?'
-			},
-			link: link,
-			template:[
-				'<input type="text" ',
-				'class="jqueryDate" ',
-				'ng-model="localDateValue" ',
-				'placeholder="{{::placeholderText}}">'
-			].join('')
-		};	
+    function WipMaskeradeDirective($filter) {
+        return {
+            restrict: 'EA',
+            replace: true,
+            scope: {
+                wipNgMask: '@?', // used by angualr to display the date propperly when the page loads
+                wipMaskeradeMask: '@?', // used by Maskerade when the user inputs a new date
+                wipPlaceholder: '@?', //place holder text
+                wipClass: '@?', //css classes
+                wipId: '@?', // id attribute value
+                wipName: '@', // name attribute value used to set $validity on the form
+                wipValue: '=', // the model on the parent scope, filtered with the wipNgMask and loaded as $scope.localValue
+                wipRequired: '@?' // weather it's required or not, sets ng-required
+            },
+            link: link,
+            template: [
+                    '<input autocomplete="off" ',
+                            'placeholder="{{::wipPlaceholder}}" ',
+                            'class="{{::wipClass}}" ',
+                            'id="{{::wipId}}" ',
+                            'name="{{::wipName}}" ',
+                            'ng-model="localValue" ',
+                            'type="text"',
+                            'ng-required="{{::wipRequired}}"',
+                            ' />'
+            ].join(''),
+            require: ['^?form'],
+        };
 
-	function link ($scope, $element, $attrs) {
+        function link($scope, $element, $attrs, $controls) {
 
-			var filter = $filter('date');
+            var form = $controls[0];
 
-			$scope.localDateValue = filter($scope.dateValue, $scope.dateNgMask);
-			console.log($scope.localDateValue);
+            var filter = $filter('date');
+            $scope.localValue = filter($scope.wipValue, $scope.wipNgMask);
 
-			// call back function to get value from Maskerade
-			function onChange (date) {
-				if(angular.isDate(date)){
-					$scope.dateValue = date;
-				}
-			}
+            var element = $element[0];
+console.log(element);
+            angular.element(element).maskerade({
+                mask: $scope.wipMaskeradeMask,
+                change: onChange,
+                correct: onChange,
+				corrected: onChange,
+            });
 
-			var options = {
-				mask:$scope.dateMask,
-				change:onChange,
-				corrected:onChange,
-			}
-
-			$element.maskerade(options);			
-	}
-}
+            function onChange(date) {
+            	console.log(date);
+            	if(form){
+	                form[$scope.wipName].$setValidity('invalidDate', !isNaN(date.getTime()));
+	            }
+				if(!isNaN(date.getTime())){
+                	$scope.wipValue = date;
+	            }else{
+	            	$scope.wipValue = 'Invalid Date';
+	            }
+	            $scope.$apply();
+            }
+        }
+    }
 })();

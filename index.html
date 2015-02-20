@@ -9,29 +9,36 @@
 		<script src="js/maskeradeDirective.js" ></script>
 	</head>
 	<body>
+	<form name="thisForm" no-validate>
 		<div ng-app="app" ng-controller="mainController as main">
 			<div>
-				<label for="dateEntered">Selected With jQuery</label>
-				<input type="text" class="jqueryDate" name="dateEntered" ng-model="main.dateEntered" placeholder="Put Date Here"/>
+				<label for="jQueryDate">Selected With jQuery
+				<input type="text" class="jqueryDate" id="jQueryDate" name="jQueryDateEntered" ng-model="main.jQueryDateEntered" placeholder="Put Date Here"/></label>
 			</div>
 			<div>
-				<label for="dateEntered">Angular model updated with ngChange</label>
-				<input type="text" class="jqueryDate" name="dateEntered" ng-model="main.dateEntered" placeholder="Put Date Here"/>
-			</div>			
+				<label>main.jQueryDateEntered value: </label>
+				<span>{{main.jQueryDateEntered}}</span>
+			</div>
+			<hr/>
 			<div>
-				<label for="dateEntered">Angular Directive</label>
-				<div maskerade-directive date-value="main.dateEntered" placeholder-text="Put Date Here" >
-				</div>
-			</div>		
+				<label for="ngChangeDate">Angular model updated with ngChange
+				<input type="text" class="jqueryDate" id="ngChangeDate" name="dateNgChangeEntered" ng-model="main.dateNgChangeEntered" placeholder="Put Date Here"/></label>
+			</div>	
 			<div>
-				<label for="dateEntered">Angular Directive Custom Masks</label>
-				<div wip-maskerade-directive date-value="main.dateEntered" placeholder-text="Put Date Here" date-mask="dd/mm/yyyy" date-ng-mask="dd/MM/yyyy" >
-				</div>
+				<label>main.dateNgChangeEntered value: </label>
+				<span>{{main.dateNgChangeEntered}}</span>
+			</div>	
+			<hr/>	
+			<div>
+				<label for="directiveDate">Angular Directive Custom Masks
+				<span wip-maskerade-directive wip-id="directiveDate" wip-value="main.directiveDateEntered" wip-placeholder="Put Date Here" wip-ng-mask="MM/dd/yyyy" wip-maskerade-mask="mm/dd/yyyy" >
+				</span></label>
 			</div>
 			<div>
-				<label>main.dateEntered value: </label>
-				<span>{{main.dateEntered}}</span>
+				<label>main.directiveDateEntered value: </label>
+				<span>{{main.directiveDateEntered}}</span>
 			</div>
+			<hr/>
 		</div>
 		<a href="page2.html">page2</a>
 		<script type="text/javascript">
@@ -39,5 +46,6 @@
 			  $(".jqueryDate").maskerade();
 			});
 		</script>
+		</form>
 	</body>
 </html>

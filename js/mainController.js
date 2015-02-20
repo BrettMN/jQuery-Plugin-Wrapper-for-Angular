@@ -27,11 +27,13 @@
 		log(angular.element().maskerade);
 		log('verify angular.element version matches jQuery');
 
-		main.dateEntered = new Date();
+		main.jQueryDateEntered = new Date();
+		main.dateNgChangeEntered = new Date();
+		main.directiveDateEntered = new Date();
 
 		main.ngDateChange = function () {
 			//get value from the element that calls ngDateChange
-			main.dateEntered = angular.element(this).value();
+			main.dateNgChangeEntered = angular.element(this).value();
 		}
 	}
 
